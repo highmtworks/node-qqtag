@@ -20,19 +20,6 @@ interface UnQuotePrivateAccessor {
   readonly value: Quote | QuasiQuote | Function
 }
 
-class ArrayWithRaw<T> extends Array<T> {
-  readonly raw: Array<T>
-  constructor(raw: Array<T>, arr: Array<T>) {
-    super(...arr)
-    this.raw = raw
-    Object.defineProperty(this, 'raw', {
-      writable: false,
-      enumerable: false,
-      configurable: false,
-    })
-  }
-}
-
 export class QuasiQuote {
   private readonly rs: string[]
   private readonly ss: string[]
@@ -55,7 +42,7 @@ export class QuasiQuote {
   }
   intoTag(): [TemplateStringsArray, ...any[]] {
     const qEvalled = QuasiQuote.evalQ(this)
-    return [new ArrayWithRaw(qEvalled.rs, qEvalled.ss), ...qEvalled.vs]
+    return [newArrayWithRaw(qEvalled.rs, qEvalled.ss), ...qEvalled.vs]
   }
   sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: readonly string[], ...vs: any[]) => T)): T {
     return f.apply(null, this.intoTag())
@@ -121,6 +108,15 @@ export class QuasiQuote {
     const v = [...q1.vs, ...q2.vs]
     return new QuasiQuote(r, s, v, false)
   }
+}
+
+const newArrayWithRaw = <T>(raw: Array<T>, arr: Array<T>): TemplateStringsArray => {
+  return Object.defineProperty(Array.from(arr), 'raw', {
+    value: raw,
+    writable: false,
+    enumerable: false,
+    configurable: false,
+  })
 }
 
 export const quote = (value: any) => new Quote(value)
