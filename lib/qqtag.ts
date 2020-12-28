@@ -5,11 +5,19 @@ export class Quote {
   }
 }
 
+interface QuotePrivateAccessor {
+  readonly value: any
+}
+
 export class UnQuote {
-  private readonly qq: Quote | QuasiQuote | Function
-  constructor(qq: Quote | QuasiQuote | Function) {
-    this.qq = qq
+  private readonly value: Quote | QuasiQuote | Function
+  constructor(value: Quote | QuasiQuote | Function) {
+    this.value = value
   }
+}
+
+interface UnQuotePrivateAccessor {
+  readonly value: Quote | QuasiQuote | Function
 }
 
 export class QuasiQuote {
@@ -44,27 +52,23 @@ export class QuasiQuote {
     let i = 0
     while (i < q_vs.length) {
       if (q_vs[i] instanceof Quote) {
+        const nq = q_vs.splice(i, 1)[0] as QuotePrivateAccessor
         const t0 = q_ss.splice(i, 1)[0]
         const tz = q_ss.splice(i, 1)[0] // next item always exists
-        const u = q_vs.splice(i, 1)[0]
-        q_ss.splice(i, 0, `${t0}${u.value}${tz}`)
+        q_ss.splice(i, 0, `${t0}${nq.value}${tz}`)
       } else if (q_vs[i] instanceof UnQuote) {
-        const nq = q_vs[i].qq
-        if (nq instanceof Function) {
-          const nv = nq()
-          if (nv === undefined) {
-            const t0 = q_ss.splice(i, 1)[0]
-            const tz = q_ss.splice(i, 1)[0] // next item always exists
-            q_ss.splice(i, 0, `${t0}${tz}`)
-            q_vs.splice(i, 1)
-          } else {
-            q_vs.splice(i, 1, nv)
-          }
+        const nq = q_vs[i] as UnQuotePrivateAccessor
+        const nv = nq.value instanceof Function ? nq.value() : nq.value
+        if (nv === undefined) {
+          const t0 = q_ss.splice(i, 1)[0]
+          const tz = q_ss.splice(i, 1)[0] // next item always exists
+          q_ss.splice(i, 0, `${t0}${tz}`)
+          q_vs.splice(i, 1)
         } else {
-          q_vs.splice(i, 1, nq)
+          q_vs.splice(i, 1, nv)
         }
       } else if (q_vs[i] instanceof QuasiQuote) {
-        const nq = q_vs[i]
+        const nq = q_vs[i] as QuasiQuote
         const t0 = q_ss.splice(i, 1)[0]
         const tz = q_ss.splice(i, 1)[0] // next item always exists
         const nq_ss = nq.ss.slice(0)

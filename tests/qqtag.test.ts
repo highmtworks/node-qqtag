@@ -107,7 +107,7 @@ describe('qqtag', () => {
       expect(q.isEmpty).toBeFalsy()
       expect(q.intoTag()).toEqual([['24', '53'], 1])
     })
-    it('unquote is trimmed if it returns undefined', () => {
+    it('is trimmed if it returns undefined', () => {
       let b = false
       const q = qq`1${uq(() => { if (b) { return 3 } })}2`
       expect(q.isEmpty).toBeFalsy()
@@ -116,7 +116,7 @@ describe('qqtag', () => {
       expect(q.isEmpty).toBeFalsy()
       expect(q.intoTag()).toEqual([['1', '2'], 3])
     })
-    it('unquote is not trimmed if it returns null', () => {
+    it('is not trimmed if it returns null', () => {
       let b = false
       const q = qq`1${uq(() => { if (b) { return 3 } else { return null } })}2`
       expect(q.isEmpty).toBeFalsy()
