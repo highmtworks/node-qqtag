@@ -166,7 +166,7 @@ const query = qq`select * from tab1 where col1 = ${new Numeric(value)}`
 ```
 
 
-## API
+## Public API
 
 (To be fixed)
 
@@ -175,7 +175,7 @@ const query = qq`select * from tab1 where col1 = ${new Numeric(value)}`
 * `unquote: (qq: Quote | QuasiQuote | Function) => UnQuote`
 * `concatQ: (sep: string, qs: QuasiQuote[]) => QuasiQuote`
 * `class QuasiQuote`
-    * `sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: string[], ...vs: any[]) => T)): T`
+    * `sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: readonly string[], ...vs: any[]) => T)): T`
     * `intoTag(): [string[], ...any[]]`
     * `evaluated(): QuasiQuote`
     * `get isEmpty(): boolean`
