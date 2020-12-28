@@ -1,6 +1,6 @@
 {
   "name": "qqtag",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "quasi quote library for javascript template literals",
   "main": "dist/index.js",
   "scripts": {
@@ -20,8 +20,8 @@
   "author": "highmtworks",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/highmtworks/node-qqtag"
+    "type": "git",
+    "url": "https://github.com/highmtworks/node-qqtag"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",
