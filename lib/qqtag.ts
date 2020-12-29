@@ -110,14 +110,13 @@ export class QuasiQuote {
   }
 }
 
-const newArrayWithRaw = <T>(raw: Array<T>, arr: Array<T>): TemplateStringsArray => {
-  return Object.defineProperty(Array.from(arr), 'raw', {
+const newArrayWithRaw = <T>(raw: Array<T>, arr: Array<T>): TemplateStringsArray =>
+  Object.defineProperty(Array.from(arr), 'raw', {
     value: raw,
     writable: false,
     enumerable: false,
     configurable: false,
   })
-}
 
 export const quote = (value: any) => new Quote(value)
 
