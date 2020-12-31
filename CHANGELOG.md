@@ -4,6 +4,11 @@ This project does not conform to [Semantic Versioning](http://semver.org/).
 
 Minor version will be incremented if any compatible or incompatible API changes are introduced.
 
+## [1.1.2] 2020-12-31
+### Changed
+- (No functional change)
+- Fix again an example of cosmosdb in README
+
 ## [1.1.1] 2020-12-31
 ### Changed
 - (No functional change)
