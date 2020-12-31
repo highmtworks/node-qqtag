@@ -137,7 +137,7 @@ const newQuery = (ss, ...vs) => {
   return { query, parameters }
 }
 
-const querySpec = qq`select * from ${qt(collectionName)} t where t.UserId = ${UserId}}`.sendTo(newQuery)
+const querySpec = qq`select * from ${qt(collectionName)} t where t.UserId = ${userId}`.sendTo(newQuery)
 const feedOptios = {
   // ...
 }
