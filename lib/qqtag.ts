@@ -10,14 +10,14 @@ interface QuotePrivateAccessor {
 }
 
 export class UnQuote {
-  private readonly value: Quote | QuasiQuote | Function
-  constructor(value: Quote | QuasiQuote | Function) {
+  private readonly value: Quote | QuasiQuote | (() => any)
+  constructor(value: Quote | QuasiQuote | (() => any)) {
     this.value = value
   }
 }
 
 interface UnQuotePrivateAccessor {
-  readonly value: Quote | QuasiQuote | Function
+  readonly value: Quote | QuasiQuote | (() => any)
 }
 
 class QuasiQuoteImpl {
@@ -132,7 +132,7 @@ const newArrayWithRaw = <T>(raw: Array<T>, arr: Array<T>): TemplateStringsArray 
 
 export const quote = (value: any) => new Quote(value)
 
-export const unquote = (qq: Quote | QuasiQuote | Function) => new UnQuote(qq)
+export const unquote = (qq: Quote | QuasiQuote | (() => any)) => new UnQuote(qq)
 
 export const quasiquote = (ss: TemplateStringsArray, ...vs: any[]) => new QuasiQuote(new QuasiQuoteImpl(Array.from(ss.raw), Array.from(ss), Array.from(vs), false))
 
