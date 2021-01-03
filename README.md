@@ -168,21 +168,44 @@ const query = qq`select * from tab1 where col1 = ${new Numeric(value)}`
 
 ## Public API
 
-(To be fixed)
-
 * `quasiquote: (ss: TemplateStringsArray, ...vs: any[]) => QuasiQuote`
+    - Construct a quasisquote.
 * `quote: (value: any) => Quote`
-* `unquote: (qq: Quote | QuasiQuote | Function) => UnQuote`
+    - Construct a quote that can be embeded in a quasiquote.
+* `unquote: (qq: Quote | QuasiQuote | (() => any) | Promise<Quote> | Promise<QuasiQuote> | (() => Promise<any>)) => UnQuote`
+    - Construct an unquote that can be embeded in a quasiquote.
 * `concatQ: (sep: string, qs: QuasiQuote[]) => QuasiQuote`
+    - Concatenate quasiquotes.
+* `stringify: (ss: TemplateStringsArray, ...vs: any[]) => any`
+    - A tag function that stringify a string literal to the same string as that string literal.
 * `class QuasiQuote`
+    * (constructor is not intended to be used to create a instance directly)
     * `sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: readonly string[], ...vs: any[]) => T)): T`
-    * `intoTag(): [string[], ...any[]]`
+        - Pass a quasiquote to a tag function.
+    * `sendToAsync<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => (T | Promise<T>)) | ((ss: readonly string[], ...vs: any[]) => T)): Promise<T>`
+        - The async version of `sendTo`.
+            - If Promises are embedded in unquotes, the async version should be used.
+            - If `f` returns a promise, it is also awaited.
+    * `intoTag(): [TemplateStringsArray, ...any[]]`
+        - Convert a quasiquote to a captured tagged literal that can be passed to a tag function.
+    * `intoTagAsync(): Promise<[TemplateStringsArray, ...any[]]>`
+        - The async version of `intoTag`.
+            - If Promises are embedded in unquotes, the async version should be used.
     * `evaluated(): QuasiQuote`
+        - Evaluate a captured quasiquote.
+            - Before evaluated, `sendTo` or `intoTag` of a quasiquote evaluates embeded functions in unquotes lazily.
+    * `evaluatedAsync(): Promise<QuasiQuote>`
+        - The async version of `evaluated`.
     * `get isEmpty(): boolean`
+        - Return if a quasiquote is empty (that is, just `` .)
     * `static empty(): QuasiQuote`
+        - Construct an empty quasiquote.
     * `static joinQ(sep: string, q1: QuasiQuote, q2: QuasiQuote): QuasiQuote`
+        - Join two quasiquotes.
 * `class Quote`
+    * (constructor is not intended to be used to create a instance directly)
 * `class UnQuote`
+    * (constructor is not intended to be used to create a instance directly)
 
 
 ## License
