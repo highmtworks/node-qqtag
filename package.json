@@ -14,8 +14,11 @@
   ],
   "keywords": [
     "tag",
-    "quasi quote",
-    "template literal"
+    "quasi",
+    "quote",
+    "template",
+    "literal",
+    "nest"
   ],
   "author": "highmtworks",
   "license": "MIT",
