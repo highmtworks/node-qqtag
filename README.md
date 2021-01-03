@@ -208,5 +208,9 @@ const query = qq`select * from tab1 where col1 = ${new Numeric(value)}`
     * (constructor is not intended to be used to create a instance directly)
 
 
+## References
+
+* [nest-literal](https://www.npmjs.com/package/nest-literal) seems to provide similar functionalities.
+
 ## License
 This library is licensed under the MIT License.
