@@ -5,7 +5,7 @@ This project does not conform to [Semantic Versioning](http://semver.org/).
 Minor version will be incremented if any compatible or incompatible API changes are introduced.
 
 ## [1.2.0] 2021-01-03
-### Addes
+### Added
 - Add async interface.
 - Add stringify function which is a tag function producing the same string as a template literal.
 
