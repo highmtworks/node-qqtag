@@ -4,6 +4,11 @@ This project does not conform to [Semantic Versioning](http://semver.org/).
 
 Minor version will be incremented if any compatible or incompatible API changes are introduced.
 
+## [1.2.1] 2021-05-27
+### Added
+- Fix async interface.
+- Fix build error on new tsc.
+
 ## [1.2.0] 2021-01-03
 ### Added
 - Add async interface.
