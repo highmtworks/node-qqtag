@@ -182,8 +182,8 @@ const evalAsyncQ = async (q: QuasiQuoteImpl): Promise<QuasiQuoteImpl> => {
   return new QuasiQuoteImpl(q_rs, q_ss, q_vs, true)
 }
 
-const newArrayWithRaw = <T>(raw: Array<T>, arr: Array<T>): TemplateStringsArray =>
-  Object.defineProperty(Array.from(arr), 'raw', {
+const newArrayWithRaw = (raw: readonly string[], arr: string[]): TemplateStringsArray =>
+  Object.defineProperty(Array.from(arr) as string[] & { readonly raw: typeof raw; }, 'raw', {
     value: raw,
     writable: false,
     enumerable: false,
