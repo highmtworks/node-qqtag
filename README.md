@@ -182,7 +182,7 @@ const query = qq`select * from tab1 where col1 = ${new Numeric(value)}`
     * (constructor is not intended to be used to create a instance directly)
     * `sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: readonly string[], ...vs: any[]) => T)): T`
         - Pass a quasiquote to a tag function.
-    * `sendToAsync<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => (T | Promise<T>)) | ((ss: readonly string[], ...vs: any[]) => T)): Promise<T>`
+    * `sendToAsync<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => (T | Promise<T>)) | ((ss: readonly string[], ...vs: any[]) => (T | Promise<T>))): Promise<T>`
         - The async version of `sendTo`.
             - If Promises are embedded in unquotes, the async version should be used.
             - If `f` returns a promise, it is also awaited.

@@ -61,7 +61,7 @@ export class QuasiQuote {
   sendTo<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => T) | ((ss: readonly string[], ...vs: any[]) => T)): T {
     return f.apply(null, this.intoTag())
   }
-  async sendToAsync<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => (T | Promise<T>)) | ((ss: readonly string[], ...vs: any[]) => T)): Promise<T> {
+  async sendToAsync<T>(f: ((ss: TemplateStringsArray, ...vs: any[]) => (T | Promise<T>)) | ((ss: readonly string[], ...vs: any[]) => (T | Promise<T>))): Promise<T> {
     return await f.apply(null, await this.intoTagAsync())
   }
   static joinQ(sep: string, q1: QuasiQuote, q2: QuasiQuote): QuasiQuote {
